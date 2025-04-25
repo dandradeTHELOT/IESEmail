@@ -39,7 +39,7 @@
       margin-bottom: 20px;
     }
 
-    input[type="email"], input[type="text"] {
+    input[type="email"] {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
@@ -89,21 +89,31 @@
       e.preventDefault();
 
       const email = document.getElementById("email").value;
-      const name = document.getElementById("name").value;
 
-      // Aquí puedes añadir la lógica para verificar si el correo existe en tu base de datos (Google Sheets, por ejemplo)
-      const messageElement = document.getElementById("message");
-      messageElement.textContent = ""; // Limpiar mensajes previos
+      // URL de tu Webhook en Make
+      const webhookUrl = "https://hook.us2.make.com/nobdzvhbzsmkmoh4b2w3qtkgvwl3hlgq";
 
-      // Simulación de verificación de correo electrónico
-      const emailExists = false; // Aquí va la lógica real para comprobar si el correo ya existe
-
-      if (emailExists) {
-        messageElement.textContent = "Este correo ya fue usado.";
-      } else {
-        // Aquí iría la lógica para enviar los datos
-        messageElement.textContent = "Formulario enviado correctamente.";
-      }
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email })  // Solo enviamos el correo
+      })
+      .then(response => response.json())
+      .then(data => {
+        const messageElement = document.getElementById("message");
+        if (data.success) {
+          messageElement.textContent = "Formulario enviado correctamente.";
+        } else {
+          messageElement.textContent = "Hubo un error al enviar el formulario.";
+        }
+      })
+      .catch(error => {
+        console.error("Error al enviar los datos:", error);
+        const messageElement = document.getElementById("message");
+        messageElement.textContent = "Hubo un error al enviar los datos.";
+      });
     });
   </script>
 </body>
