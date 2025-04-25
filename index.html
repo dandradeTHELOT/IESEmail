@@ -90,6 +90,7 @@
       e.preventDefault();
 
       const email = document.getElementById("email").value;
+      const timestamp = new Date().toISOString();  // Obtener fecha y hora actual en formato ISO
 
       // URL de tu Webhook en Make
       const webhookUrl = "https://hook.us2.make.com/nobdzvhbzsmkmoh4b2w3qtkgvwl3hlgq";
@@ -99,7 +100,10 @@
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email })  // Solo enviamos el correo
+        body: JSON.stringify({ 
+          email: email,
+          timestamp: timestamp  // Incluimos la fecha y hora
+        })
       })
       .then(response => response.text())  // Cambiamos a text() para leer el texto plano
       .then(data => {
