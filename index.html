@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Fuente de Google Fonts -->
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .logo img {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #003A7E;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    input[type="email"], input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #003A7E;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #3D93F7;
+    }
+
+    .message {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="https://ies-systemsmx.com.mx/assets/img/IES-logo.svg" alt="IES Logo">
+    </div>
+    <h2>Formulario de Registro</h2>
+    <form id="myForm">
+      <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
+      <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+      <button type="submit">Enviar</button>
+    </form>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    document.getElementById("myForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const name = document.getElementById("name").value;
+
+      // Aquí puedes añadir la lógica para verificar si el correo existe en tu base de datos (Google Sheets, por ejemplo)
+      const messageElement = document.getElementById("message");
+      messageElement.textContent = ""; // Limpiar mensajes previos
+
+      // Simulación de verificación de correo electrónico
+      const emailExists = false; // Aquí va la lógica real para comprobar si el correo ya existe
+
+      if (emailExists) {
+        messageElement.textContent = "Este correo ya fue usado.";
+      } else {
+        // Aquí iría la lógica para enviar los datos
+        messageElement.textContent = "Formulario enviado correctamente.";
+      }
+    });
+  </script>
+</body>
+</html>
