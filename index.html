@@ -103,16 +103,21 @@
       .then(response => response.json())
       .then(data => {
         const messageElement = document.getElementById("message");
+
+        // Mensaje de éxito
         if (data.success) {
-          messageElement.textContent = "Formulario enviado correctamente.";
+          messageElement.textContent = "Revisa tu correo con los siguientes pasos.";
+          messageElement.style.color = "green"; // Para mensaje exitoso
         } else {
-          messageElement.textContent = "Hubo un error al enviar el formulario.";
+          messageElement.textContent = "Hubo un error al enviar los datos.";
+          messageElement.style.color = "red"; // Para mensaje de error
         }
       })
       .catch(error => {
         console.error("Error al enviar los datos:", error);
         const messageElement = document.getElementById("message");
         messageElement.textContent = "Hubo un error al enviar los datos.";
+        messageElement.style.color = "red"; // Para mensaje de error
       });
     });
   </script>
