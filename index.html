@@ -100,24 +100,24 @@
         },
         body: JSON.stringify({ email })  // Solo enviamos el correo
       })
-      .then(response => response.json())
+      .then(response => response.json())  // Parseamos la respuesta JSON
       .then(data => {
         const messageElement = document.getElementById("message");
 
-        // Mensaje de éxito
-        if (data.success) {
+        // Si la respuesta contiene el correo, mostramos mensaje de éxito
+        if (data.email) {
           messageElement.textContent = "Revisa tu correo con los siguientes pasos.";
-          messageElement.style.color = "green"; // Para mensaje exitoso
+          messageElement.style.color = "green";  // Para mensaje exitoso
         } else {
           messageElement.textContent = "Hubo un error al enviar los datos.";
-          messageElement.style.color = "red"; // Para mensaje de error
+          messageElement.style.color = "red";  // Para mensaje de error
         }
       })
       .catch(error => {
         console.error("Error al enviar los datos:", error);
         const messageElement = document.getElementById("message");
         messageElement.textContent = "Hubo un error al enviar los datos.";
-        messageElement.style.color = "red"; // Para mensaje de error
+        messageElement.style.color = "red";  // Para mensaje de error
       });
     });
   </script>
