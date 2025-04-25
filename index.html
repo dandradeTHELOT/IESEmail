@@ -101,14 +101,14 @@
         },
         body: JSON.stringify({ email })  // Solo enviamos el correo
       })
-      .then(response => response.json())  // Parseamos la respuesta JSON
+      .then(response => response.text())  // Cambiamos a text() para leer el texto plano
       .then(data => {
-        console.log(data);  // Verifica lo que devuelve el webhook
+        console.log("Respuesta del Webhook:", data);  // Verifica lo que devuelve el webhook
 
         const messageElement = document.getElementById("message");
 
-        // Ahora verificamos si 'email' existe en la respuesta (lo que te da el webhook)
-        if (data.email) {
+        // Verificamos si la respuesta contiene "Accepted"
+        if (data.includes("Accepted")) {
           messageElement.textContent = "Revisa tu correo con los siguientes pasos.";
           messageElement.style.color = "green";  // Para mensaje exitoso
         } else {
