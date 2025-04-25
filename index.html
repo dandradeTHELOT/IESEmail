@@ -25,7 +25,7 @@
       width: 100%;
       max-width: 400px;
       text-align: center;
-      margin: 0 20px; /* Esto agrega espacio a los lados */
+      margin: 0 20px; /* Ajustamos el margen */
     }
 
     .logo img {
@@ -40,12 +40,13 @@
     }
 
     input[type="email"] {
-      width: 100%;
+      width: calc(100% - 20px); /* Ajuste para que ocupe el 100% menos el padding */
       padding: 10px;
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 16px;
+      box-sizing: border-box; /* Garantiza que el padding no afecte el ancho total */
     }
 
     button {
@@ -102,9 +103,11 @@
       })
       .then(response => response.json())  // Parseamos la respuesta JSON
       .then(data => {
+        console.log(data);  // Verifica lo que devuelve el webhook
+
         const messageElement = document.getElementById("message");
 
-        // Si la respuesta contiene el correo, mostramos mensaje de éxito
+        // Ahora verificamos si 'email' existe en la respuesta (lo que te da el webhook)
         if (data.email) {
           messageElement.textContent = "Revisa tu correo con los siguientes pasos.";
           messageElement.style.color = "green";  // Para mensaje exitoso
